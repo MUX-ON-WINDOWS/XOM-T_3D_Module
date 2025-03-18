@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest xmlns="http://www.imsglobal.org/xsd/imscp_v1p1"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          identifier="ILIAS-MANIFEST"
+          version="1.1">
+    <metadata>
+        <schema>ILIAS Export</schema>
+        <schemaversion>5.4</schemaversion>
+        <type>lm</type> 
+        <lom>
+            <general>
+                <identifier>
+                    <catalog>ILIAS</catalog>
+                    <entry>lm</entry>
+                </identifier>
+                <title>
+                    <string language="en">ILIAS Learning Module</string>
+                </title>
+            </general>
+        </lom>
+    </metadata>
+    <organizations default="ORG-1">
+        <organization identifier="ORG-1">
+            <title>ILIAS Learning Module</title>
+            <item identifier="ITEM-1" identifierref="RESOURCE-1">
+                <title>Module Title</title>
+            </item>
+        </organization>
+    </organizations>
+    <resources>
+        <resource identifier="RESOURCE-1" type="lm" href="index.html">
+            <file href="index.html"/>
+            <file href="bomb.glb"/>
+            <file href="css/main.css"/>
+            <file href="js/main.js"/>
+            <file href="package.json"/>
+            <file href="package-lock.json"/>
+            <file href="LICENSE"/>
+            <file href="README.md"/>
+        </resource>
+    </resources>
+</manifest>
