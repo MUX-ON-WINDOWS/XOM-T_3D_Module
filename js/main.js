@@ -115,22 +115,15 @@ document.getElementById('info2').addEventListener('click', () => {
 
 // Progress Bar Setup
 let progress = 0;
-const totalButtons = 10; // Change this based on the total number of buttons
+const totalButtons = 2; // Change this based on the total number of buttons
 const progressStep = 100 / totalButtons; // Equal contribution from each button
 
 const progressBar = document.createElement("div");
+progressBar.className = "progress-container-bar";
 progressBar.style.width = "0%";
-progressBar.style.height = "20px";
-progressBar.style.background = "green";
-progressBar.style.borderRadius = "10px";
 progressBar.style.transition = "width 0.3s ease-in-out";
 
 const progressContainer = document.createElement("div");
-progressContainer.style.width = "100%";
-progressContainer.style.maxWidth = "300px";
-progressContainer.style.background = "#ccc";
-progressContainer.style.borderRadius = "10px";
-progressContainer.style.marginTop = "20px";
 progressContainer.className = "progress-container";
 progressContainer.appendChild(progressBar);
 
@@ -138,6 +131,7 @@ document.body.appendChild(progressContainer);
 
 // Track clicked buttons
 const clickedButtons = new Set(); 
+const nextButton = document.getElementById('button-go-next');
 
 // Function to handle button clicks
 function increaseProgress(buttonId) {
@@ -146,6 +140,10 @@ function increaseProgress(buttonId) {
         progress += progressStep;
         if (progress > 100) progress = 100; // Ensure it doesn't exceed 100%
         progressBar.style.width = progress + "%";
+        if (progress === 100) {
+            showInfo("You have completed all the steps!");
+            nextButton.style.display = 'block';
+        }
     }
 }
 
