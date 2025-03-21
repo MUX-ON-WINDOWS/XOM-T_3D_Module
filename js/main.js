@@ -25,11 +25,11 @@ controls.enableDamping = true;
 let model;
 const loader = new GLTFLoader();
 loader.load(
-    '/bomb.glb',
+    '/xomt.glb',
     function (gltf) {
         model = gltf.scene;
         model.scale.set(0.5, 0.5, 0.5);
-        model.position.set(0, -3, 0);
+        model.position.set(0, 1, 0);
         scene.add(model);
         console.log('Model Loaded:', model);
 
@@ -53,7 +53,7 @@ function updateButtonPositions() {
     const vector = new THREE.Vector3();
 
     // Button 1 (adjust position as needed)
-    vector.set(0.5, 1, 0);
+    vector.set(0.5, 0, 0);
     vector.applyMatrix4(model.matrixWorld);
     vector.project(camera);
     const x1 = (vector.x * 0.5 + 0.5) * window.innerWidth;
@@ -111,4 +111,54 @@ document.getElementById('info1').addEventListener('click', () => {
 });
 document.getElementById('info2').addEventListener('click', () => {
     showInfo("This is Information 2 about another part of the model.");
+});
+
+// Progress Bar Setup
+let progress = 0;
+const totalButtons = 10; // Change this based on the total number of buttons
+const progressStep = 100 / totalButtons; // Equal contribution from each button
+
+const progressBar = document.createElement("div");
+progressBar.style.width = "0%";
+progressBar.style.height = "20px";
+progressBar.style.background = "green";
+progressBar.style.borderRadius = "10px";
+progressBar.style.transition = "width 0.3s ease-in-out";
+
+const progressContainer = document.createElement("div");
+progressContainer.style.width = "100%";
+progressContainer.style.maxWidth = "300px";
+progressContainer.style.background = "#ccc";
+progressContainer.style.borderRadius = "10px";
+progressContainer.style.marginTop = "20px";
+progressContainer.className = "progress-container";
+progressContainer.appendChild(progressBar);
+
+document.body.appendChild(progressContainer);
+
+// Track clicked buttons
+const clickedButtons = new Set(); 
+
+// Function to handle button clicks
+function increaseProgress(buttonId) {
+    if (!clickedButtons.has(buttonId) && progress < 100) {
+        clickedButtons.add(buttonId);
+        progress += progressStep;
+        if (progress > 100) progress = 100; // Ensure it doesn't exceed 100%
+        progressBar.style.width = progress + "%";
+    }
+}
+
+// Attach event listeners to buttons
+document.getElementById('info1').addEventListener('click', () => increaseProgress('info1'));
+document.getElementById('info2').addEventListener('click', () => increaseProgress('info2'));
+
+// Add more buttons dynamically
+const buttonIds = ['info1', 'info2', 'info3', 'info4', 'info5']; // Add more button IDs
+
+buttonIds.forEach(id => {
+    const button = document.getElementById(id);
+    if (button) {
+        button.addEventListener('click', () => increaseProgress(id));
+    }
 });
