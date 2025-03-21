@@ -1,4 +1,5 @@
-import * as THREE from 'three';
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@latest/build/three.module.js';
+//import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
@@ -28,7 +29,7 @@ loader.load(
     '/xomt.glb',
     function (gltf) {
         model = gltf.scene;
-        model.scale.set(0.5, 0.5, 0.5);
+        model.scale.set(1, 1, 1);
         model.position.set(0, 1, 0);
         scene.add(model);
         console.log('Model Loaded:', model);
@@ -36,6 +37,9 @@ loader.load(
         // Show buttons once the model loads
         document.getElementById('info1').style.display = 'block';
         document.getElementById('info2').style.display = 'block';
+        document.getElementById('info3').style.display = 'block';
+        document.getElementById('info4').style.display = 'block';
+        document.getElementById('info5').style.display = 'block';
     },
     undefined,
     function (error) {
@@ -44,7 +48,7 @@ loader.load(
 );
 
 // Position the camera
-camera.position.set(0, 2, 5);
+camera.position.set(0, 7, 0);
 camera.lookAt(0, 0, 0);
 
 // Convert 3D position to 2D screen position
@@ -52,8 +56,8 @@ function updateButtonPositions() {
     if (!model) return;
     const vector = new THREE.Vector3();
 
-    // Button 1 (adjust position as needed)
-    vector.set(0.5, 0, 0);
+    // Button 1 (On/Off Button)
+    vector.set(-1.5, 0, 0.8);
     vector.applyMatrix4(model.matrixWorld);
     vector.project(camera);
     const x1 = (vector.x * 0.5 + 0.5) * window.innerWidth;
@@ -62,13 +66,40 @@ function updateButtonPositions() {
     document.getElementById('info1').style.top = `${y1}px`;
 
     // Button 2 (adjust position as needed)
-    vector.set(-0.5, 1, 0);
+    vector.set(-0.5, 0, 0);
     vector.applyMatrix4(model.matrixWorld);
     vector.project(camera);
     const x2 = (vector.x * 0.5 + 0.5) * window.innerWidth;
     const y2 = (1 - (vector.y * 0.5 + 0.5)) * window.innerHeight;
     document.getElementById('info2').style.left = `${x2}px`;
     document.getElementById('info2').style.top = `${y2}px`;
+
+    // Button 3 (SOR-R readers)
+    vector.set(0.5, 0, 0.25);
+    vector.applyMatrix4(model.matrixWorld);
+    vector.project(camera);
+    const x3 = (vector.x * 0.5 + 0.5) * window.innerWidth;
+    const y3 = (1 - (vector.y * 0.5 + 0.5)) * window.innerHeight;
+    document.getElementById('info3').style.left = `${x3}px`;
+    document.getElementById('info3').style.top = `${y3}px`;
+
+    // Button 4 (adjust position as needed)
+    vector.set(-0.9, 0, -0.2);
+    vector.applyMatrix4(model.matrixWorld);
+    vector.project(camera);
+    const x4 = (vector.x * 0.5 + 0.5) * window.innerWidth;
+    const y4 = (1 - (vector.y * 0.5 + 0.5)) * window.innerHeight;
+    document.getElementById('info4').style.left = `${x4}px`;
+    document.getElementById('info4').style.top = `${y4}px`;
+
+    // Button 5 (Read Button)
+    vector.set(-1.5, 0, 0);
+    vector.applyMatrix4(model.matrixWorld);
+    vector.project(camera);
+    const x5 = (vector.x * 0.5 + 0.5) * window.innerWidth;
+    const y5 = (1 - (vector.y * 0.5 + 0.5)) * window.innerHeight;
+    document.getElementById('info5').style.left = `${x5}px`;
+    document.getElementById('info5').style.top = `${y5}px`;
 }
 
 // Animation Loop
@@ -107,15 +138,24 @@ document.addEventListener('click', (event) => {
 
 // Attach event listeners to buttons
 document.getElementById('info1').addEventListener('click', () => {
-    showInfo("This is Information 1 about the 3D model.");
+    showInfo("Press the on off button to turn on the XOM-T.");
 });
 document.getElementById('info2').addEventListener('click', () => {
     showInfo("This is Information 2 about another part of the model.");
 });
+document.getElementById('info3').addEventListener('click', () => {
+    showInfo("Hier voer je de SOR-T in.");
+});
+document.getElementById('info4').addEventListener('click', () => {
+    showInfo("This is Information 2 about another part of the model.");
+});
+document.getElementById('info5').addEventListener('click', () => {
+    showInfo("Geen idee wat deze knop doet.");
+});
 
 // Progress Bar Setup
 let progress = 0;
-const totalButtons = 2; // Change this based on the total number of buttons
+const totalButtons = 5; // Change this based on the total number of buttons
 const progressStep = 100 / totalButtons; // Equal contribution from each button
 
 const progressBar = document.createElement("div");
@@ -130,7 +170,7 @@ progressContainer.appendChild(progressBar);
 document.body.appendChild(progressContainer);
 
 // Track clicked buttons
-const clickedButtons = new Set(); 
+const clickedButtons = new Set();
 const nextButton = document.getElementById('button-go-next');
 
 // Function to handle button clicks
@@ -150,6 +190,9 @@ function increaseProgress(buttonId) {
 // Attach event listeners to buttons
 document.getElementById('info1').addEventListener('click', () => increaseProgress('info1'));
 document.getElementById('info2').addEventListener('click', () => increaseProgress('info2'));
+document.getElementById('info3').addEventListener('click', () => increaseProgress('info3'));
+document.getElementById('info4').addEventListener('click', () => increaseProgress('info4'));
+document.getElementById('info5').addEventListener('click', () => increaseProgress('info5'));
 
 // Add more buttons dynamically
 const buttonIds = ['info1', 'info2', 'info3', 'info4', 'info5']; // Add more button IDs
