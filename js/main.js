@@ -25,7 +25,8 @@ controls.enableDamping = true;
 let model;
 const loader = new GLTFLoader();
 loader.load(
-    '/xomt.glb',
+    // '/xomt.glb',
+    `${import.meta.env.BASE_URL}xomt.glb`,
     function (gltf) {
         model = gltf.scene;
         model.scale.set(1, 1, 1);
