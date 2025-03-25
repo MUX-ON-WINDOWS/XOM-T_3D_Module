@@ -203,3 +203,27 @@ buttonIds.forEach(id => {
         button.addEventListener('click', () => increaseProgress(id));
     }
 });
+
+// Automatically generate the information buttons
+
+function generateInfoButtons(count) {
+    const container = document.getElementById("button-container"); // Ensure you have a container in your HTML
+    
+    for (let i = 1; i <= count; i++) {
+        const button = document.createElement("button");
+        button.id = `info${i}`;
+        button.className = "info-button";
+        button.style.display = "none";
+        
+        button.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+            </svg>
+        `;
+        
+        container.appendChild(button);
+    }
+}
+
+// Example usage: Generate 5 buttons
+generateInfoButtons(17);

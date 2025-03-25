@@ -4,5 +4,8 @@
   },
   "devDependencies": {
     "vite": "^6.2.2"
-  }
+  },
+  "scripts": {
+  "build": "npx vite build"
+}
 }
