@@ -1,12 +1,11 @@
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@latest/build/three.module.js';
-//import * as THREE from 'three';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-
+import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 // Scene, Camera, and Renderer setup
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setClearColor( 0xffffff, 0);
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
@@ -32,8 +31,16 @@ loader.load(
         model.scale.set(1, 1, 1);
         model.position.set(0, 1, 0);
         scene.add(model);
-        console.log('Model Loaded:', model);
+      //  console.log('Model Loaded:', model);
+        // Compute bounding box
+        const box = new THREE.Box3().setFromObject(model);
+        const center = box.getCenter(new THREE.Vector3());
 
+        // Reposition the model to center
+        model.position.sub(center);
+
+        scene.add(model);
+        console.log('Model Loaded:', model);
         // Show buttons once the model loads
         document.getElementById('info1').style.display = 'block';
         document.getElementById('info2').style.display = 'block';
@@ -203,27 +210,3 @@ buttonIds.forEach(id => {
         button.addEventListener('click', () => increaseProgress(id));
     }
 });
-
-// Automatically generate the information buttons
-
-function generateInfoButtons(count) {
-    const container = document.getElementById("button-container"); // Ensure you have a container in your HTML
-    
-    for (let i = 1; i <= count; i++) {
-        const button = document.createElement("button");
-        button.id = `info${i}`;
-        button.className = "info-button";
-        button.style.display = "none";
-        
-        button.innerHTML = `
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
-            </svg>
-        `;
-        
-        container.appendChild(button);
-    }
-}
-
-// Example usage: Generate 5 buttons
-generateInfoButtons(17);
