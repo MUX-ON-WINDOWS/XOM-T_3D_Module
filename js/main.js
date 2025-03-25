@@ -189,7 +189,6 @@ function increaseProgress(buttonId) {
         if (progress > 100) progress = 100; // Ensure it doesn't exceed 100%
         progressBar.style.width = progress + "%";
         if (progress === 100) {
-            showInfo("You have completed all the steps!");
             nextButton.style.display = 'block';
         }
     }
