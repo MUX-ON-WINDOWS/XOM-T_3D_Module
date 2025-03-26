@@ -74,7 +74,7 @@ function updateButtonPositions() {
     document.getElementById('info1').style.top = `${y1}px`;
 
     // Button 2 (adjust position as needed)
-    vector.set(-0.5, 0, 0);
+    vector.set(-1.5, 0, 0.4);
     vector.applyMatrix4(model.matrixWorld);
     vector.project(camera);
     const x2 = (vector.x * 0.5 + 0.5) * window.innerWidth;
@@ -101,7 +101,7 @@ function updateButtonPositions() {
     document.getElementById('info4').style.top = `${y4}px`;
 
     // Button 5 (Read Button)
-    vector.set(-1.5, 0, 0);
+    vector.set(-0.15, 0, 0.4);
     vector.applyMatrix4(model.matrixWorld);
     vector.project(camera);
     const x5 = (vector.x * 0.5 + 0.5) * window.innerWidth;
@@ -146,19 +146,19 @@ document.addEventListener('click', (event) => {
 
 // Attach event listeners to buttons
 document.getElementById('info1').addEventListener('click', () => {
-    showInfo("Press the on off button to turn on the XOM-T.");
+    showInfo("[ON/OFF] Zet de XOM-T aan of uit.");
 });
 document.getElementById('info2').addEventListener('click', () => {
-    showInfo("This is Information 2 about another part of the model.");
+    showInfo("[ESC] Annuleer uw keuze of ga terug.");
 });
 document.getElementById('info3').addEventListener('click', () => {
-    showInfo("Hier voer je de SOR-T in.");
+    showInfo("Hier voer je de SOR/T in.");
 });
 document.getElementById('info4').addEventListener('click', () => {
-    showInfo("This is Information 2 about another part of the model.");
+    showInfo("Voor het selecteren in het hoofdmenu, kunt u gebruik maken van de [F]-knoppen boven aan het toetsenbord. Daarbij kunt u gebruik maken van de [↑]-knop voor de selectie van de overige menu items.");
 });
 document.getElementById('info5').addEventListener('click', () => {
-    showInfo("Geen idee wat deze knop doet.");
+    showInfo("[ENT] Bevestig uw keuze, selecteer uw selectie of ga verder.");
 });
 
 // Progress Bar Setup
