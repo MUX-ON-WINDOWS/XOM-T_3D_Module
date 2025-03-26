@@ -126,8 +126,12 @@ animate();
 // Function to show info in the text box
 function showInfo(text) {
     const infoBox = document.getElementById('infoBox');
+    const infoTextRemove = document.getElementById('info-startup');
+
     infoBox.innerHTML = text;
     infoBox.style.display = 'block';
+    infoTextRemove.style.display = 'none';
+
     setTimeout(() => {
         infoBox.style.opacity = '1';
     }, 50);
