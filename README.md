@@ -1,8 +1,30 @@
-https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white
-https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E
-https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white
+# 3D Module  
 
-# 3D Module
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)  
+![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)  
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)  
+
+## 📌 Overview  
+
+The **3D Module** is a project utilizing **Three.js** to create interactive 3D experiences for the web. This module is ideal for developers and designers looking to implement WebGL-powered 3D graphics.  
+
+## 🚀 Features  
+
+- ✅ **Easy Setup** – Quickly start your Three.js project with minimal configuration.  
+- ✅ **Lightweight** – Uses **Vite** for fast development and optimized builds.  
+- ✅ **Interactive 3D Elements** – Create, animate, and manipulate 3D objects.  
+
+## 🛠️ Installation  
+
+To install **Three.js** and **Vite**, run the following commands:  
+
+```bash
+# three.js
+npm install --save three
+
+# vite
+npm install --save-dev vite
+
 
 A brief description of what this project does and who it's for.
 
@@ -12,14 +34,9 @@ This how you install Three.js locally.
 For more information go to: https://threejs.org/docs/index.html?q=in#manual/en/introduction/Installation
 
 ````
-# three.js
-npm install --save three
+## ▶️ Running the Project  
 
-# vite
-npm install --save-dev vite
-````
-
-Launch:
+After installation, launch the project with:
 ````
 npx vite
 ````
